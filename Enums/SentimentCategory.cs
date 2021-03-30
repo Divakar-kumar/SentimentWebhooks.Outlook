@@ -7,7 +7,7 @@ namespace ServerlessWebhooks.Github.Enums
     public enum SentimentCategory
     {
         ASAP,
-        Later,
-        Normal        
+        LATER,
+        NORMAL        
     }
 }
