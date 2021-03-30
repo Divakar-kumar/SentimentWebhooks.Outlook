@@ -12,9 +12,9 @@ namespace ServerlessWebhooks.Github
 {
     public static class FxWebhook
     {
-        [FunctionName("Function1")]
-        public static async Task<IActionResult> GetOutlookCategory(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req,
+        [FunctionName("SentimentCategory")]
+        public static async Task<IActionResult> GetSentimentCategory(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest req,
             ILogger log)
         {
             SentimentCategory sentimentCategory = SentimentCategory.Later;
