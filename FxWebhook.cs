@@ -23,10 +23,17 @@ namespace ServerlessWebhooks.Github
 
             double sentimentScore = double.Parse(await new StreamReader(req.Body).ReadToEndAsync());
 
+            // If content of mail is negative , 
+            // return ASAP as response for immediate attention
+            
             if (sentimentScore < 0.4)
             {
                 sentimentCategory = SentimentCategory.ASAP;
             }
+            
+            // If content of mail is neutral , 
+            // return NORMAL as response
+
             else if (sentimentScore < 0.7)
             {
                 sentimentCategory = SentimentCategory.NORMAL;
