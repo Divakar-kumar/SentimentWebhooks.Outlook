@@ -17,7 +17,7 @@ namespace ServerlessWebhooks.Github
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req,
             ILogger log)
         {
-            Reply sentimentCategory=Reply.Later;
+            SentimentCategory sentimentCategory = SentimentCategory.Later;
 
             log.LogInformation("Sentiment Webhook http function triggered");
 
@@ -25,11 +25,11 @@ namespace ServerlessWebhooks.Github
 
             if (sentimentScore < 0.4)
             {
-                sentimentCategory = Reply.ASAP;
+                sentimentCategory = SentimentCategory.ASAP;
             }
             else if (sentimentScore < 0.7)
             {
-                sentimentCategory = Reply.Normal;
+                sentimentCategory = SentimentCategory.Normal;
             }
 
             log.LogInformation($"Sentiment category based on score { sentimentCategory }");

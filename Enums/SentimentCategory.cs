@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ServerlessWebhooks.Github.Enums
 {
-    public enum Reply
+    public enum SentimentCategory
     {
         ASAP,
         Later,
