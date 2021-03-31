@@ -47,7 +47,7 @@ namespace ServerlessWebhooks.Github
 
                 else if (sentimentScore < 0.7)
                 {
-                    sentimentCategory = SentimentCategory.NORMAL;
+                    sentimentCategory = SentimentCategory.NEUTRAL;
                 }
 
                 log.LogInformation($"Sentiment category based on score { sentimentCategory }");                
