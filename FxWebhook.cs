@@ -19,18 +19,20 @@ namespace ServerlessWebhooks.Github
             [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest req,
             ILogger log)
         {
-            SentimentCategory sentimentCategory = SentimentCategory.LATER;
+            SentimentCategory sentimentCategory = SentimentCategory.NORMAL;
 
             log.LogInformation("Sentiment Webhook http function triggered");
 
-            var sentimentObjects = JArray.Parse(await new StreamReader(req.Body).ReadToEndAsync());
+            var sentimentObjects = JObject.Parse(await new StreamReader(req.Body).ReadToEndAsync());
 
             log.LogInformation($"Sentiment object array {sentimentObjects}");
 
-            foreach (var sentiment in sentimentObjects)
+            foreach (var sentiment in sentimentObjects["documents"])
             {
-                
-                var sentimentScore = double.Parse(Convert.ToString(sentiment["text"]));
+
+                log.LogInformation($"Sentiment object : sentiment id  {sentiment["id"] } , sentiment score : {sentiment["score"]}");
+
+                var sentimentScore = double.Parse(Convert.ToString(sentiment["score"]));
 
                 // If content of mail is negative , 
                 // return ASAP as response for immediate attention
@@ -41,7 +43,7 @@ namespace ServerlessWebhooks.Github
                 }
 
                 // If content of mail is neutral , 
-                // return NORMAL as response
+                // return NEUTRAL as response
 
                 else if (sentimentScore < 0.7)
                 {
